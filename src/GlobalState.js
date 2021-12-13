@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import ContextAPI from "./context/ContextAPI";
-import About from "./Components/About/About";
-import Header from "./Components/Header/Header";
-import ShowTodoItems from "./Components/ShowListItems/ShowListItems";
-import AddNewTask from "./Components/TodoList/AddNewTask";
-import TodoList from "./Components/TodoList/TodoList";
-import { Routes, Route } from "react-router-dom";
-import Navbar from "./Components/Navbar/Navbar";
 
-const App = () => {
+const GlobalState = (props) => {
   const [getTodoListItems, setTodoListItems] = useState([]);
   const [getTodoListItem, setTodoListItem] = useState("");
   const [getShowTodoList, setShowTodoList] = useState(true);
@@ -61,11 +54,6 @@ const App = () => {
     setTodoListItems(todoItems);
   };
 
-  let todoList = null;
-  if (getShowTodoList) {
-    todoList = <TodoList />;
-  }
-
   return (
     <ContextAPI.Provider
       value={{
@@ -80,22 +68,9 @@ const App = () => {
         handleCompletedTodoListItem: handleCompletedTodoListItem,
       }}
     >
-      <div className="rtl text-center">
-        <Navbar />
-        <Header title={`لیست کارهای روزانه`} />
-        <AddNewTask />
-        <ShowTodoItems />
-
-        <Routes>
-          <Route exact path="/" element={todoList}></Route>
-          <Route path="about" element={<About />}></Route>
-        </Routes>
-
-        {/* <TodoList /> */}
-        {/* {todoList} */}
-      </div>
+      {props.children}
     </ContextAPI.Provider>
   );
 };
 
-export default App;
+export default GlobalState;

@@ -8,10 +8,14 @@ const Todo = ({
   changeTodoItem,
 }) => {
   return (
-    <div className="card border-info rounded-lg w-25 mt-3 mb-3 mx-auto p-3 bg-info">
+    <div className="card border-info rounded-lg w-25 mt-3 mb-3 mx-auto p-3 bg-light">
       <div className="d-flex">
-        <p className="text-left w-75  mt-2 mb-2 mx-auto text-dark h4">
-          {isCompleted ? <del>{todoItem}</del> : todoItem}
+        <p className="text-left w-75  mt-2 mb-2 mx-auto text-success h4">
+          {isCompleted ? (
+            <del className="text-danger">{todoItem}</del>
+          ) : (
+            todoItem
+          )}
         </p>
 
         <div className="btn-group">
